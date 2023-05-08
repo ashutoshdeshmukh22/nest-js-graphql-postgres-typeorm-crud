@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  api:
+    image: nestjs_crud_img
+    container_name: nestjs-graphql-crud
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+    environment: 
+      - PORT=3000
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - POSTGRES_PASSWORD=ashutosh 
+    ports:
+      - "8080:3000"
+
+  postgres:
+    image: postgres:latest
+    container_name: database-postgres
+    restart: always
+    ports:
+      - "35000:5432"
+    environment:
+      - DB_USER=postgres
+      - POSTGRES_PASSWORD=ashutosh
+      - POSTGRES_DB=book_db
